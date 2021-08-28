@@ -24,3 +24,66 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-tab-button {opacity: 0.4;}
+ion-tab-button.tab-selected {opacity: 1;}
+ion-tab-button ion-icon {font-size: 25px !important;}
+
+ion-header ion-title {background-color: #28282b; color: #FFFFFF;}
+
+.app-banner {
+    position: relative;
+    background-color: #28282b; 
+    background-image: url('./assets/images/banner.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    color: #FFFFFF;
+    padding: 25px 15px 50px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    // border-top: 2px solid #ffd80b;
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+    .app-banner-inner {position: relative; z-index: 2;}
+    .logo {
+        font-size: 20px;
+        margin-bottom: 15px;
+        text-align: center;
+        fa-icon {
+            color: #ffd80b;
+            margin-right: 10px;
+        }
+        span {font-weight: bold; font-style: italic;}
+    }
+    h4 {
+        font-weight: 300;
+        text-transform: uppercase;
+        span {color: #ffd80b;}
+    }
+}
+.placeList {
+    position: relative;
+    z-index: 2;
+	border-top-left-radius: 25px;
+	margin-top: -25px;
+	background-color: #FFF;
+	border-top-right-radius: 25px;
+    padding: 10px;
+}
+ion-back-button {margin-left: 7px; font-size: 12px !important; color: #FFFFFF;}
+.cal-btn-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
