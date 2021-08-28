@@ -1,0 +1,7 @@
+{
+  "name": "Buildr",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
