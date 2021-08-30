@@ -4,18 +4,25 @@
       <ion-back-button defaultHref="/" icon="chevron-back-outline" text=""></ion-back-button>
     </ion-buttons>
     <ion-title>Workout calendar</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tabs/calendar/add">
+        <ion-icon class="header-right-icon" name="add" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div class="cal-btn-wrap py-3">
+  <!-- <div class="cal-btn-wrap py-3">
     <ion-button color="dark" size="small" [disabled]="isToday" (click)="today()">Today</ion-button>
     <ion-button color="dark" size="small" (click)="loadEvents()">Load Events</ion-button>
-  </div>
+    <ion-button color="dark" size="small">Add Events</ion-button>
+  </div> -->
 
-  <ion-row class="align-items-center">
-    <!-- Move back one screen of the slides -->
+  <ion-row class="align-items-center mt-3">
     <ion-col size="2">
       <ion-button size="small" fill="clear" (click)="back()">
         <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
@@ -25,8 +32,7 @@
     <ion-col size="8" class="ion-text-center">
       <h4 class="m-0">{{ viewTitle }}</h4>
     </ion-col>
- 
-    <!-- Move forward one screen of the slides -->
+
     <ion-col size="2">
       <ion-button size="small" fill="clear" (click)="next()">
         <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
@@ -42,7 +48,8 @@
                 (onEventSelected)="onEventSelected($event)"
                 (onTitleChanged)="onViewTitleChanged($event)"
                 (onTimeSelected)="onTimeSelected($event)"
-                [step]="calendar.step">
+                [step]="calendar.step"
+                >
       </calendar>
   </ion-card>
 

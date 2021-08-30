@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add data</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">
+        <ion-icon class="header-right-icon" name="checkmark" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <div class="add-detail">
+
+    <div class="mb-3">
+      <ion-item>
+        <ion-label position="stacked">Title</ion-label>
+        <ion-input tpye="text" [(ngModel)]="event.title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Weight</ion-label>
+        <ion-input tpye="text" [(ngModel)]="event.weight"></ion-input>
+      </ion-item>
+    </div>
+
+    <h5>{{ viewTitle }}</h5>
+    <ion-card class="mt-3">
+      <calendar
+        [calendarMode]="calendar.mode"
+        [currentDate]="calendar.currentDate"
+        (onTitleChanged)="onViewTitleChanged($event)"
+        (onTimeSelected)="onTimeSelected($event)"
+        lockSwipes="true"
+      >
+      </calendar>
+    </ion-card>
+  </div>
+
+</ion-content>

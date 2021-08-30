@@ -82,8 +82,15 @@ ion-header ion-title {background-color: #28282b; color: #FFFFFF;}
     padding: 10px;
 }
 ion-back-button {margin-left: 7px; font-size: 12px !important; color: #FFFFFF;}
+.header-right-icon {font-size: 25px !important; color: #FFFFFF;}
 .cal-btn-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.add-detail {
+    h5 {
+        padding-left: 17px;
+        margin: 0;
+    }
 }
