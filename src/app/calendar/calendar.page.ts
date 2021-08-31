@@ -52,7 +52,8 @@ export class CalendarPage implements OnInit {
     }
 
     loadEvents() {
-        this.eventSource = this.createRandomEvents();
+
+        this.eventSource = this.createRandomEvents()
     }
 
     onViewTitleChanged(title) {
@@ -79,7 +80,7 @@ export class CalendarPage implements OnInit {
         this.isToday = today.getTime() === event.getTime();
     }
 
-    createRandomEvents() {
+    createRandomEvents(): void {
         let events = [];
 
         events.push({
@@ -89,23 +90,17 @@ export class CalendarPage implements OnInit {
             allDay: false
         });
 
-        // this.workoutService.workoutList$.pipe(
-        //     map((data:any)=>{
-        //         data[0].startTime = new Date(data[0].startTime);
-        //         data[0].endTime = new Date(data[0].endTime);
-        //         return data;
-        //     })
-        //   ).subscribe((data: any) => {
-        //     events = data;
-        //     return events;
-        // });
+         this.workoutService.workoutList$.pipe(
+             map((data:any)=>{
+                 data[0].startTime = new Date(data[0].startTime);
+                 data[0].endTime = new Date(data[0].endTime);
+                 return data;
+             })
+           ).subscribe((data: any) => {
+            this.eventSource = data;
+         });
 
-        // setTimeout(() => {
-        //     return events;
-        // });
 
-        return events;
-        
     }
 
     onRangeChanged(ev) {
