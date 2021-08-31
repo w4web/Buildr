@@ -15,29 +15,54 @@
 <ion-content>
   
   <div class="add-detail">
-
-    <div class="mb-3">
-      <ion-item>
-        <ion-label position="stacked">Title</ion-label>
-        <ion-input tpye="text" [(ngModel)]="event.title"></ion-input>
-      </ion-item>
-      <!-- <ion-item>
-        <ion-label position="stacked">Weight</ion-label>
-        <ion-input tpye="text" [(ngModel)]="event.weight"></ion-input>
-      </ion-item> -->
-    </div>
-
-    <h5>{{ viewTitle }}</h5>
-    <ion-card class="mt-3">
+    <h5 class="mt-3">Add / Edit event detail</h5>
+    <ion-card class="my-3 add-calendar">
+      <ion-card-content>
+        <div class="row">
+          <div class="col-6">
+            <ion-item class="ion-no-padding">
+              <ion-label position="stacked">Weight</ion-label>
+              <ion-input tpye="text" [(ngModel)]="event.weight"></ion-input>
+            </ion-item>
+          </div>
+          <div class="col-6">
+            <ion-item class="ion-no-padding">
+              <ion-label position="stacked">Calories</ion-label>
+              <ion-input tpye="text" [(ngModel)]="event.calories"></ion-input>
+            </ion-item>
+          </div>
+          <div class="col-6">
+            <ion-item class="ion-no-padding">
+              <ion-label position="stacked">Energie</ion-label>
+              <ion-input tpye="text" [(ngModel)]="event.energie"></ion-input>
+            </ion-item>
+          </div>
+          <div class="col-6">
+            <ion-item class="ion-no-padding">
+              <ion-label position="stacked">Sleep</ion-label>
+              <ion-input tpye="text" [(ngModel)]="event.sleep"></ion-input>
+            </ion-item>
+          </div>
+        </div>
+      </ion-card-content>
+      <h5>{{ viewTitle }}</h5>
       <calendar
         [calendarMode]="calendar.mode"
         [currentDate]="calendar.currentDate"
         (onTitleChanged)="onViewTitleChanged($event)"
         (onTimeSelected)="onTimeSelected($event)"
         lockSwipes="true"
+        [monthviewEventDetailTemplate]="template"
       >
       </calendar>
+      <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+      </ng-template>
     </ion-card>
+
+    <div class="px-3 pb-3 d-flex justify-content-end">
+      <ion-button (click)="save()" color="dark" size="small">Submit now!</ion-button>
+    </div>
+
   </div>
 
 </ion-content>

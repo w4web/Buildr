@@ -16,6 +16,7 @@ export class CalendarPage implements OnInit {
     viewTitle;
 
     isToday: boolean;
+    isEvent = false;
     calendar = {
         mode: 'month' as CalendarMode,
         step: 30 as Step,
@@ -29,18 +30,18 @@ export class CalendarPage implements OnInit {
     }
 
     ngOnInit() {
-        // this.workoutService.workoutList$.pipe(
-        //     map((data:any, i)=>{
-        //         data[i].startTime = new Date(data[i].startTime);
-        //         console.log("index", i);
-        //         return data;
-        //     })
-        //   ).subscribe((data: any) => {
-        //     this.eventSource = data;
-        //     console.log("accepted date", data);
-        // });
 
-        this.loadEvents();
+        this.workoutService.workoutList$.pipe(
+            map((data: any) => {
+                for (var i = 0; i < data.length; i ++) {
+                    data[i].startTime = new Date(data[i].startTime);
+                    data[i].endTime = new Date(data[i].endTime);
+                }
+                return data;
+            })
+        ).subscribe((data: any) => {
+            this.eventSource = data;
+        });
     }
 
     next() {
@@ -51,17 +52,8 @@ export class CalendarPage implements OnInit {
         this.myCal.slidePrev();
     }
 
-    loadEvents() {
-
-        this.eventSource = this.createRandomEvents()
-    }
-
     onViewTitleChanged(title) {
         this.viewTitle = title;
-    }
-
-    onEventSelected(event) {
-        console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title);
     }
 
     today() {
@@ -69,8 +61,18 @@ export class CalendarPage implements OnInit {
     }
 
     onTimeSelected(ev) {
-        console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' +
-            (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
+
+        console.log("Date select", ev);
+
+        if(ev.events !== undefined && ev.events.length !== 0) {
+            this.isEvent = true;
+        } else {
+            this.isEvent = false;
+        }
+    }
+
+    onEventSelected(event) {
+        console.log('Event selected:', event);
     }
 
     onCurrentDateChanged(event: Date) {
@@ -78,29 +80,6 @@ export class CalendarPage implements OnInit {
         today.setHours(0, 0, 0, 0);
         event.setHours(0, 0, 0, 0);
         this.isToday = today.getTime() === event.getTime();
-    }
-
-    createRandomEvents(): void {
-        let events = [];
-
-        events.push({
-            title: 'Event - ',
-            startTime: new Date("Tue Aug 10 2021 12:00:00 GMT+0530"),
-            endTime: new Date("Tue Aug 10 2021 12:00:00 GMT+0530"),
-            allDay: false
-        });
-
-         this.workoutService.workoutList$.pipe(
-             map((data:any)=>{
-                 data[0].startTime = new Date(data[0].startTime);
-                 data[0].endTime = new Date(data[0].endTime);
-                 return data;
-             })
-           ).subscribe((data: any) => {
-            this.eventSource = data;
-         });
-
-
     }
 
     onRangeChanged(ev) {

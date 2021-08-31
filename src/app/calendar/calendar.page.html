@@ -16,11 +16,15 @@
 
 <ion-content>
 
-  <!-- <div class="cal-btn-wrap py-3">
-    <ion-button color="dark" size="small" [disabled]="isToday" (click)="today()">Today</ion-button> -->
-    <ion-button color="dark" size="small" (click)="loadEvents()">Load Events</ion-button>
-    <!-- <ion-button color="dark" size="small">Add Events</ion-button>
-  </div> -->
+  <div class="cal-btn-wrap py-3">
+    <!-- <ion-button color="dark" size="small" [disabled]="isToday" (click)="today()">Today</ion-button> -->
+    <ion-button color="dark" size="small" routerLink="/tabs/calendar/add">
+      <ion-icon class="btn-icon" name="add"></ion-icon>
+      Add Event
+    </ion-button>
+    <!-- <ion-button color="dark" [disabled]="!isEvent" size="small">Delete</ion-button> -->
+    <!-- <ion-button color="dark" size="small">Delete all</ion-button> -->
+  </div>
 
   <ion-row class="align-items-center mt-3">
     <ion-col size="2">
@@ -49,8 +53,47 @@
                 (onTitleChanged)="onViewTitleChanged($event)"
                 (onTimeSelected)="onTimeSelected($event)"
                 [step]="calendar.step"
+                [monthviewDisplayEventTemplate]="template"
+                [monthviewEventDetailTemplate]="detailTemplate"
                 >
       </calendar>
+
+      <ng-template #template let-view="view" let-row="row" let-col="col">
+        <div [class.with-event]="view.dates[row*7+col].events.length">
+          {{view.dates[row*7+col].label}}
+          <div class="indicator-container">
+            <div class="event-indicator" *ngFor="let e of view.dates[row*7+col].events"></div>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template #detailTemplate let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+        <ion-list class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail" overflow-scroll="false">
+            <ion-item *ngFor="let event of selectedDate?.events" (click)="eventSelected(event)">
+                <!-- <span *ngIf="!event.allDay" class="monthview-eventdetail-timecolumn">{{event.startTime|date: 'HH:mm'}}
+                    -
+                    {{event.endTime|date: 'HH:mm'}}
+                </span>
+                <span *ngIf="event.allDay" class="monthview-eventdetail-timecolumn">{{allDayLabel}}</span> -->
+                <div class="event-detail-wrap">
+                  <div class="event-detail">Event id: <span>{{event.title}}</span>
+                    ( <span *ngIf="!event.allDay" class="monthview-eventdetail-timecolumn">{{event.startTime|date: 'HH:mm'}}
+                      -
+                      {{event.endTime|date: 'HH:mm'}}
+                    </span>)
+                  </div>
+                  <div class="event-detail-actions">
+                    <span><ion-icon class="action-icon view" name="eye"></ion-icon></span>
+                    <span><ion-icon class="action-icon delete" name="trash"></ion-icon></span>
+                  </div>
+                </div>
+            </ion-item>
+            <ion-item *ngIf="selectedDate?.events.length==0">
+                <div class="no-events-label">{{noEventsLabel}}</div>
+            </ion-item>
+        </ion-list>
+    </ng-template>
+
   </ion-card>
 
 </ion-content>

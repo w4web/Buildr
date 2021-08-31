@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkoutService } from 'src/app/shared/services/workout.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -13,23 +14,27 @@ export class AddComponent implements OnInit {
   };
 
   viewTitle: string;
+  showEventDetail = false;
   
   event:any = {
-    title: '',
-    // weight: '',
+    title: Math.floor(Math.random() * 1000),
+    weight: '',
+    calories: '',
+    energie: '',
+    sleep: '',
     startTime: null,
     endTime: null,
     allDay: false
   };
 
-  constructor(public workoutService: WorkoutService) {}
+  constructor(public workoutService: WorkoutService, private router: Router) {}
 
   ngOnInit() {
   }
 
-  save() {    
-    console.log("New event", this.event);
+  save() {
     this.workoutService.add(this.event);
+    this.router.navigate(['/tabs/calendar'])
   }
  
   onViewTitleChanged(title) {

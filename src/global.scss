@@ -91,6 +91,43 @@ ion-back-button {margin-left: 7px; font-size: 12px !important; color: #FFFFFF;}
 .add-detail {
     h5 {
         padding-left: 17px;
-        margin: 0;
+        margin: 0 0 15px 0;
+    }
+    ion-input input {padding: 0 !important;}
+}
+.btn-icon {margin-right: 3px; position: relative; top: -1px;}
+
+.monthview-primary-with-event {
+    background-color: #28282b !important;
+    .with-event {
+        font-size: 14px;
+        line-height: 1em;
     }
 }
+.monthview-selected {
+    background-color: #ad9100 !important;
+}
+.indicator-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3px;
+}
+.event-indicator {
+    background: #ffd80b;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin: 0 2px;
+}
+table.monthview-datetable {margin-bottom: 0;}
+.event-detail span {color: #ad9100;}
+.event-detail-wrap {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.event-detail-actions span {margin-left: 5px;}
+.action-icon.view {color: #ad9100;}
+.monthview-eventdetail-timecolumn {font-size: 12px;}
