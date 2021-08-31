@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { CalendarMode, Step } from 'ionic2-calendar/calendar';
 import { CalendarComponent } from "ionic2-calendar";
 import { WorkoutService } from '../shared/services/workout.service';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-calendar',
@@ -28,10 +29,18 @@ export class CalendarPage implements OnInit {
     }
 
     ngOnInit() {
-        this.workoutService.workoutList$.subscribe((data: any) => {
-            this.eventSource = data;
-            console.log("mmm", Date.parse(data[0].startTime));
-        });
+        // this.workoutService.workoutList$.pipe(
+        //     map((data:any, i)=>{
+        //         data[i].startTime = new Date(data[i].startTime);
+        //         console.log("index", i);
+        //         return data;
+        //     })
+        //   ).subscribe((data: any) => {
+        //     this.eventSource = data;
+        //     console.log("accepted date", data);
+        // });
+
+        this.loadEvents();
     }
 
     next() {
@@ -42,9 +51,9 @@ export class CalendarPage implements OnInit {
         this.myCal.slidePrev();
     }
 
-    // loadEvents() {
-    //     this.eventSource = this.createRandomEvents();
-    // }
+    loadEvents() {
+        this.eventSource = this.createRandomEvents();
+    }
 
     onViewTitleChanged(title) {
         this.viewTitle = title;
@@ -70,42 +79,34 @@ export class CalendarPage implements OnInit {
         this.isToday = today.getTime() === event.getTime();
     }
 
-    // createRandomEvents() {
-    //     var events = [];
-    //     for (var i = 0; i < 50; i += 1) {
-    //         var date = new Date();
-    //         var eventType = Math.floor(Math.random() * 2);
-    //         var startDay = Math.floor(Math.random() * 90) - 45;
-    //         var endDay = Math.floor(Math.random() * 2) + startDay;
-    //         var startTime;
-    //         var endTime;
-    //         if (eventType === 0) {
-    //             startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
-    //             if (endDay === startDay) {
-    //                 endDay += 1;
-    //             }
-    //             endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
-    //             events.push({
-    //                 title: 'All Day - ' + i,
-    //                 startTime: startTime,
-    //                 endTime: endTime,
-    //                 allDay: true
-    //             });
-    //         } else {
-    //             var startMinute = Math.floor(Math.random() * 24 * 60);
-    //             var endMinute = Math.floor(Math.random() * 180) + startMinute;
-    //             startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-    //             endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
-    //             events.push({
-    //                 title: 'Event - ' + i,
-    //                 startTime: startTime,
-    //                 endTime: endTime,
-    //                 allDay: false
-    //             });
-    //         }
-    //     }
-    //     return events;
-    // }
+    createRandomEvents() {
+        let events = [];
+
+        events.push({
+            title: 'Event - ',
+            startTime: new Date("Tue Aug 10 2021 12:00:00 GMT+0530"),
+            endTime: new Date("Tue Aug 10 2021 12:00:00 GMT+0530"),
+            allDay: false
+        });
+
+        // this.workoutService.workoutList$.pipe(
+        //     map((data:any)=>{
+        //         data[0].startTime = new Date(data[0].startTime);
+        //         data[0].endTime = new Date(data[0].endTime);
+        //         return data;
+        //     })
+        //   ).subscribe((data: any) => {
+        //     events = data;
+        //     return events;
+        // });
+
+        // setTimeout(() => {
+        //     return events;
+        // });
+
+        return events;
+        
+    }
 
     onRangeChanged(ev) {
         console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);

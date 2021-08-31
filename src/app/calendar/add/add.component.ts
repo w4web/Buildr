@@ -16,10 +16,10 @@ export class AddComponent implements OnInit {
   
   event:any = {
     title: '',
-    weight: '',
+    // weight: '',
     startTime: null,
-    endTime: '',
-    allDay: true
+    endTime: null,
+    allDay: false
   };
 
   constructor(public workoutService: WorkoutService) {}
@@ -36,8 +36,9 @@ export class AddComponent implements OnInit {
     this.viewTitle = title;
   }
  
-  onTimeSelected(ev) {    
+  onTimeSelected(ev) {
     this.event.startTime = new Date(ev.selectedTime);
+    this.event.endTime = new Date(ev.selectedTime);
   }
 
 }
