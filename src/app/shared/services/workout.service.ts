@@ -39,10 +39,10 @@ export class WorkoutService {
     this.serveIt();
   }
 
-  remove(name) {
+  remove(id) {
     let workouts = JSON.parse(localStorage.getItem('workouts'));
     for (let i = 0; i < workouts.length; i++) {
-      if (workouts[i].name == name) {
+      if (workouts[i].title == id) {
         workouts.splice(i, 1);
       }
     }

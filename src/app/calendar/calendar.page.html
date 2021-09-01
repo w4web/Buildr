@@ -22,8 +22,6 @@
       <ion-icon class="btn-icon" name="add"></ion-icon>
       Add Event
     </ion-button>
-    <!-- <ion-button color="dark" [disabled]="!isEvent" size="small">Delete</ion-button> -->
-    <!-- <ion-button color="dark" size="small">Delete all</ion-button> -->
   </div>
 
   <ion-row class="align-items-center mt-3">
@@ -69,22 +67,22 @@
 
       <ng-template #detailTemplate let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
         <ion-list class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail" overflow-scroll="false">
-            <ion-item *ngFor="let event of selectedDate?.events" (click)="eventSelected(event)">
+            <ion-item *ngFor="let event of selectedDate?.events">
                 <!-- <span *ngIf="!event.allDay" class="monthview-eventdetail-timecolumn">{{event.startTime|date: 'HH:mm'}}
                     -
                     {{event.endTime|date: 'HH:mm'}}
                 </span>
                 <span *ngIf="event.allDay" class="monthview-eventdetail-timecolumn">{{allDayLabel}}</span> -->
                 <div class="event-detail-wrap">
-                  <div class="event-detail">Event id: <span>{{event.title}}</span>
+                  <div class="event-detail" (click)="onEventSelected(event)">Event id: <span>{{event.title}}</span>
                     ( <span *ngIf="!event.allDay" class="monthview-eventdetail-timecolumn">{{event.startTime|date: 'HH:mm'}}
                       -
                       {{event.endTime|date: 'HH:mm'}}
                     </span>)
                   </div>
                   <div class="event-detail-actions">
-                    <span><ion-icon class="action-icon view" name="eye"></ion-icon></span>
-                    <span><ion-icon class="action-icon delete" name="trash"></ion-icon></span>
+                    <span><ion-icon [routerLink]="['/tabs/calendar/', event.title]" class="action-icon view" name="eye"></ion-icon></span>
+                    <span><ion-icon (click)="removeEvent(event.title)" class="action-icon delete" name="trash"></ion-icon></span>
                   </div>
                 </div>
             </ion-item>

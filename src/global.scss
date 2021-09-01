@@ -88,7 +88,7 @@ ion-back-button {margin-left: 7px; font-size: 12px !important; color: #FFFFFF;}
     align-items: center;
     justify-content: center;
 }
-.add-detail {
+.inner-page {
     h5 {
         padding-left: 17px;
         margin: 0 0 15px 0;
@@ -128,6 +128,6 @@ table.monthview-datetable {margin-bottom: 0;}
 	align-items: center;
 	justify-content: space-between;
 }
-.event-detail-actions span {margin-left: 5px;}
+.event-detail-actions span {margin-left: 5px; cursor: pointer;}
 .action-icon.view {color: #ad9100;}
 .monthview-eventdetail-timecolumn {font-size: 12px;}

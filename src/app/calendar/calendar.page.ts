@@ -52,6 +52,10 @@ export class CalendarPage implements OnInit {
         this.myCal.slidePrev();
     }
 
+    removeEvent(id):void {
+        this.workoutService.remove(id);
+    }
+
     onViewTitleChanged(title) {
         this.viewTitle = title;
     }
