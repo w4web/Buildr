@@ -1,0 +1,69 @@
+[
+    {
+        "className": "d-none",
+        "key": "title",
+        "type": "input"
+    },
+    {
+        "fieldGroupClassName": "row",
+        "fieldGroup": [
+            {
+                "className": "col-6 ion-no-padding",
+                "key": "weight",
+                "type": "input",
+                "templateOptions": {
+                    "label": "Weight"
+                }
+            },
+            {
+                "className": "col-6 ion-no-padding",
+                "key": "calories",
+                "type": "input",
+                "templateOptions": {
+                    "label": "Calories"
+                }
+            }
+        ]
+    },
+    {
+        "fieldGroupClassName": "row",
+        "fieldGroup": [
+            {
+                "className": "col-6 ion-no-padding",
+                "key": "energie",
+                "type": "input",
+                "templateOptions": {
+                    "label": "Energie"
+                }
+            },
+            {
+                "className": "col-6 ion-no-padding",
+                "key": "sleep",
+                "type": "input",
+                "templateOptions": {
+                    "label": "Sleep"
+                }
+            }
+        ]
+    },
+    {
+        "key": "startTime",
+        "type": "custom-date",
+        "defaultValue": null,
+        "templateOptions": {
+            "label": "StartTime"
+        }
+    },
+    {
+        "className": "d-none",
+        "key": "endTime",
+        "type": "input",
+        "defaultValue": null
+    },
+    {
+        "key": "allDay",
+        "type": "input",
+        "defaultValue": false,
+        "hideExpression": true
+    }
+]

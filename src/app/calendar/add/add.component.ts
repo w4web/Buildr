@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkoutService } from 'src/app/shared/services/workout.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-add',
@@ -8,42 +10,33 @@ import { Router } from '@angular/router';
 })
 export class AddComponent implements OnInit {
 
-  calendar = {
-    mode: 'month',
-    currentDate: new Date()
-  };
+  form = new FormGroup({});
+  model: any = {};
+  options: FormlyFormOptions = {};
+  fields: FormlyFieldConfig[] = [];
 
-  viewTitle: string;
-  showEventDetail = false;
-  
-  event:any = {
-    title: Math.floor(Math.random() * 1000),
-    weight: '',
-    calories: '',
-    energie: '',
-    sleep: '',
-    startTime: null,
-    endTime: null,
-    allDay: false
-  };
+  constructor(public workoutService: WorkoutService, private router: Router) {
 
-  constructor(public workoutService: WorkoutService, private router: Router) {}
+    this.workoutService.getWorkoutFields().subscribe((fields: any) => {
+      this.form = new FormGroup({});
+      this.fields = fields;
+    });
+
+  }
 
   ngOnInit() {
+    
+    setTimeout(() => {
+      this.form.get('title')!.setValue(Math.floor(Math.random() * 1000));
+    }, 1000);
+    
   }
 
   save() {
-    this.workoutService.add(this.event);
-    this.router.navigate(['/tabs/calendar'])
-  }
- 
-  onViewTitleChanged(title) {
-    this.viewTitle = title;
-  }
- 
-  onTimeSelected(ev) {
-    this.event.startTime = new Date(ev.selectedTime);
-    this.event.endTime = new Date(ev.selectedTime);
+    // this.workoutService.add(this.event);
+    // this.router.navigate(['/tabs/calendar'])
+    this.form.get('endTime')!.setValue(this.model.startTime);
+    console.log("Testing", this.model);
   }
 
 }

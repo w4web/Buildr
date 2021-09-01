@@ -50,4 +50,8 @@ export class WorkoutService {
     this.serveIt();
   }
 
+  getWorkoutFields(): any {
+    return this.http.get<any>('./assets/workoutFields.json');
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { CalendarMode, Step } from 'ionic2-calendar/calendar';
 import { CalendarComponent } from "ionic2-calendar";
 import { WorkoutService } from '../shared/services/workout.service';
@@ -25,7 +25,7 @@ export class CalendarPage implements OnInit {
 
     @ViewChild(CalendarComponent) myCal: CalendarComponent;
 
-    constructor(public workoutService: WorkoutService, private navController: NavController) {
+    constructor(public workoutService: WorkoutService, private navController: NavController, public alertController: AlertController) {
         this.workoutService.init();
     }
 
@@ -33,7 +33,7 @@ export class CalendarPage implements OnInit {
 
         this.workoutService.workoutList$.pipe(
             map((data: any) => {
-                for (var i = 0; i < data.length; i ++) {
+                for (var i = 0; i < data.length; i++) {
                     data[i].startTime = new Date(data[i].startTime);
                     data[i].endTime = new Date(data[i].endTime);
                 }
@@ -52,10 +52,6 @@ export class CalendarPage implements OnInit {
         this.myCal.slidePrev();
     }
 
-    removeEvent(id):void {
-        this.workoutService.remove(id);
-    }
-
     onViewTitleChanged(title) {
         this.viewTitle = title;
     }
@@ -68,7 +64,7 @@ export class CalendarPage implements OnInit {
 
         console.log("Date select", ev);
 
-        if(ev.events !== undefined && ev.events.length !== 0) {
+        if (ev.events !== undefined && ev.events.length !== 0) {
             this.isEvent = true;
         } else {
             this.isEvent = false;
@@ -95,5 +91,31 @@ export class CalendarPage implements OnInit {
         current.setHours(0, 0, 0);
         return date < current;
     };
+
+    async removeEvent(id) {
+        const alert = await this.alertController.create({
+            cssClass: 'my-custom-class',
+            header: 'Delete!',
+            message: 'Are you sure? you want to remove event?',
+            buttons: [
+                {
+                    text: 'Yes',
+                    handler: () => {
+                        this.workoutService.remove(id);
+                    }
+                },
+                {
+                    text: 'No',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: () => {
+                        console.log('Canceled..');
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
+    }
 
 }
