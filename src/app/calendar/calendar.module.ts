@@ -12,6 +12,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from '../shared/shared.module';
 import { CustomDateComponent } from '../shared/components/formly/date.component';
+import { CustomInputComponent } from '../shared/components/formly/input.component';
 
 export function minlengthValidationMessages(err: any, field: any): any {
   return `Should have atleast ${field.templateOptions.minLength} characters`;
@@ -28,6 +29,7 @@ export function minlengthValidationMessages(err: any, field: any): any {
     SharedModule,
     FormlyModule.forRoot({
       types: [
+        { name: 'custom-input', component: CustomInputComponent },
         { name: 'custom-date', component: CustomDateComponent }
       ],
       validationMessages: [
@@ -36,6 +38,6 @@ export function minlengthValidationMessages(err: any, field: any): any {
       ],
     }),
   ],
-  declarations: [CalendarPage, AddComponent, DetailComponent, CustomDateComponent]
+  declarations: [CalendarPage, AddComponent, DetailComponent, CustomInputComponent, CustomDateComponent]
 })
 export class CalendarPageModule {}

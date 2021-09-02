@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { WorkoutService } from 'src/app/shared/services/workout.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -14,6 +14,8 @@ export class AddComponent implements OnInit {
   model: any = {};
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] = [];
+
+  @ViewChild('reset', { static: false }) reset?: ElementRef<HTMLElement>;
 
   constructor(public workoutService: WorkoutService, private router: Router) {
 
@@ -33,10 +35,17 @@ export class AddComponent implements OnInit {
   }
 
   save() {
-    // this.workoutService.add(this.event);
-    // this.router.navigate(['/tabs/calendar'])
     this.form.get('endTime')!.setValue(this.model.startTime);
-    console.log("Testing", this.model);
+    this.workoutService.add(this.model);
+    this.router.navigate(['/tabs/calendar']);
+    this.resetFields();
+  }
+
+  resetFields(): void {
+    if (this.reset) {
+      const el: HTMLElement = this.reset.nativeElement;
+      el.click();
+    }
   }
 
 }

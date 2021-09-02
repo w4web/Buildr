@@ -8,19 +8,19 @@
         "fieldGroupClassName": "row",
         "fieldGroup": [
             {
-                "className": "col-6 ion-no-padding",
+                "className": "col-6",
                 "key": "weight",
-                "type": "input",
+                "type": "custom-input",
                 "templateOptions": {
-                    "label": "Weight"
+                    "label": "Weight (Kg)"
                 }
             },
             {
-                "className": "col-6 ion-no-padding",
+                "className": "col-6",
                 "key": "calories",
-                "type": "input",
+                "type": "custom-input",
                 "templateOptions": {
-                    "label": "Calories"
+                    "label": "Calories (Grams)"
                 }
             }
         ]
@@ -29,19 +29,19 @@
         "fieldGroupClassName": "row",
         "fieldGroup": [
             {
-                "className": "col-6 ion-no-padding",
+                "className": "col-6",
                 "key": "energie",
-                "type": "input",
+                "type": "custom-input",
                 "templateOptions": {
-                    "label": "Energie"
+                    "label": "Energie (Kcal)"
                 }
             },
             {
-                "className": "col-6 ion-no-padding",
+                "className": "col-6",
                 "key": "sleep",
-                "type": "input",
+                "type": "custom-input",
                 "templateOptions": {
-                    "label": "Sleep"
+                    "label": "Sleep (Hrs)"
                 }
             }
         ]

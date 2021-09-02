@@ -4,20 +4,22 @@ import { FieldType } from '@ngx-formly/core';
 @Component({
   selector: 'custom-date',
   template: `
-    <div class="form-group">
+    <div class="form-group mb-0">
       <input type="text" class="custom-input d-none" [formControl]="formControl" [formlyAttributes]="field" />
-      <h5>{{ viewTitle }}</h5>
-      <calendar
-        [calendarMode]="calendar.mode"
-        [currentDate]="calendar.currentDate"
-        (onTitleChanged)="onViewTitleChanged($event)"
-        (onTimeSelected)="onTimeSelected($event)"
-        lockSwipes="true"
-        [monthviewEventDetailTemplate]="template"
-      >
-      </calendar>
-      <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
-      </ng-template>
+      <h2>{{ viewTitle }}</h2>
+      <div class="calendarWrap">
+        <calendar
+          [calendarMode]="calendar.mode"
+          [currentDate]="calendar.currentDate"
+          (onTitleChanged)="onViewTitleChanged($event)"
+          (onTimeSelected)="onTimeSelected($event)"
+          lockSwipes="true"
+          [monthviewEventDetailTemplate]="template"
+        >
+        </calendar>
+        <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+        </ng-template>
+      </div>
     </div>
   `,
 })
